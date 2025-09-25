@@ -1,0 +1,6 @@
+{
+    "robot.pythonpath": [
+        "${workspaceFolder}/rfenv/Lib/python3.12/site-packages"
+    ],
+    // "robot.language-server.python": "c:\\Users\\Andrea Dela Torre\\AppData\\Local\\Programs\\Python\\Python313\\python.exe",
+}
