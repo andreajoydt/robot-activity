@@ -20,7 +20,6 @@ Click Customer Row By Email
 
 Update Existing Customer
     [Arguments]    ${customer}    ${row_index}
-    Go To Customer Page
     ${first_name}=    Set Variable    ${customer["name"].split(" ")[0]}
     ${last_name}=     Set Variable    ${customer["name"].split(" ")[1]}
 
@@ -63,3 +62,12 @@ Update Existing Customer
     Click Element    ${customers_btn_save}
 
     Verify Customer Row Data By Email    ${customer}
+
+Update And Verify Multiple Customers
+    [Arguments]    @{customers}
+    ${row_index}=    Set Variable    6
+    FOR    ${user}    IN    @{customers}
+        Update Existing Customer    ${user}    ${row_index}
+        Verify Customer Row Data By Email    ${user}
+        ${row_index}=    Evaluate    ${row_index} + 1
+    END

@@ -4,24 +4,16 @@ Library     Collections
 
 *** Keywords ***
 Display Users With Spending
-    Go To Customer Page
     ${rows}=    Get WebElements    ${table_row}
     ${index}=   Set Variable    1
 
     FOR    ${row}    IN    @{rows}
-        # Name (col 2)
         ${name}=    Get Text    xpath=(//table//tr)[${index}+1]/td[2]
-
-        # Total Spent (col 5)
         ${total_spent}=    Get Text    xpath=(//table//tr)[${index}+1]/td[5]
-
-        # Parse numeric value
         ${amount}=    Evaluate    float(re.sub(r'[^0-9.]', '', '''${total_spent}''') or 0)    re
-
         IF    ${amount} > 0
             Log To Console    ${name}: ${total_spent}
         END
-
         ${index}=    Evaluate    ${index} + 1
     END
 

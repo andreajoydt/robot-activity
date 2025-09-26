@@ -14,7 +14,7 @@ Create Customer
     Input Text    ${customers_txt_firstname}    ${first_name}
     Input Text    ${customers_txt_lastname}     ${last_name}
     Input Text    ${customers_txt_email}        ${customer["email"]}
-
+    Input Text    ${customers_txt_birthday}    ${customer["birthday"]}
     ${address}    Set Variable    ${customer["address"]["street"]} ${customer["address"]["suite"]}
     Input Text    ${customers_txt_address}      ${address}
     Input Text    ${customers_txt_city}         ${customer["address"]["city"]}
@@ -44,15 +44,6 @@ Verify Customer Row Data By Email
             Set Variable    ${found}    True
             Exit For Loop
         END
-    END
-
-Update And Verify Multiple Customers
-    [Arguments]    @{customers}
-    ${row_index}=    Set Variable    6
-    FOR    ${user}    IN    @{customers}
-        Update Existing Customer    ${user}    ${row_index}
-        Verify Customer Row Data By Email    ${user}
-        ${row_index}=    Evaluate    ${row_index} + 1
     END
 
 Add And Verify Multiple Customers
